@@ -143,3 +143,11 @@ kube_use_flannel_system_container: true
 system_images_registry: "registry.centos.org"
 system_images_registry_namespace: "centos"
 system_images_tag: "latest"
+
+etcd_system_images_registry: "registry.fedoraproject.org"
+etcd_system_images_registry_namespace: "f27"
+etcd_system_images_tag: "latest"
+
+flannel_system_images_registry: "registry.fedoraproject.org"
+flannel_system_images_registry_namespace: "f27"
+flannel_system_images_tag: "latest"

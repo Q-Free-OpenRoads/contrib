@@ -26,4 +26,4 @@ flannel_etcd_key_file: "{{ flannel_etcd_certs_dir }}/client.key"
 
 #flannel_options: --etcd-prefix=/coreos.com/network
 
-flannel_system_image: "{{ system_images_registry }}/{{ system_images_registry_namespace }}/flannel:{{ system_images_tag }}"
+flannel_system_image: "{{ flannel_system_images_registry }}/{{ flannel_system_images_registry_namespace }}/flannel:{{ flannel_system_images_tag }}"

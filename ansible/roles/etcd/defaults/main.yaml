@@ -61,4 +61,4 @@ etcd_enable: true
 
 etcd_is_proxy: false
 
-etcd_system_image: "{{ system_images_registry }}/{{ system_images_registry_namespace }}/etcd:{{system_images_tag }}"
+etcd_system_image: "{{ etcd_system_images_registry }}/{{ etcd_system_images_registry_namespace }}/etcd:{{ etcd_system_images_tag }}"
