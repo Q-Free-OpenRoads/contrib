@@ -94,10 +94,10 @@ cluster_logging: true
 cluster_monitoring: true
 
 # Turn to false to disable the kube-ui addon for this cluster
-kube_ui: false
+kube_ui: true
 
 # Turn to false to disable the kube-dash addon for this cluster
-kube_dash: false
+kube_dash: true
 
 # Turn to false to disable the node_problem_detector addon for this cluster
 node_problem_detector: false
@@ -135,11 +135,11 @@ etcd_client_port: '2379'
 flannel_etcd_use_certs: true
 apiserver_etcd_use_certs: true
 
-kube_use_node_system_container: false
-kube_use_master_system_container: false
-kube_use_etcd_system_container: false
-kube_use_flannel_system_container: false
+kube_use_node_system_container: true
+kube_use_master_system_container: true
+kube_use_etcd_system_container: true
+kube_use_flannel_system_container: true
 
-system_images_registry: "candidate-registry.fedoraproject.org"
-system_images_registry_namespace: "f26"
+system_images_registry: "registry.centos.org"
+system_images_registry_namespace: "centos"
 system_images_tag: "latest"

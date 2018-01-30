@@ -1,0 +1,9 @@
+[masters]
+dev-kub-master.chesdev.net
+
+[etcd:children]
+masters
+
+[nodes]
+dev-kub-master.chesdev.net
+#dev-kub-node-[1:8].chesdev.net
