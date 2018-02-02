@@ -11,10 +11,10 @@
     - pre-ansible
 
 # Install etcd
-- include: deploy-etcd.yml
+- import_playbook: deploy-etcd.yml
 
 # Install docker
-- include: deploy-docker.yml
+- import_playbook: deploy-docker.yml
 
 # install flannel
 - hosts:
@@ -42,13 +42,13 @@
     - { role: contiv, contiv_role: netmaster, when: networking == 'contiv' }
 
 # install kube master services
-- include: deploy-master.yml
+- import_playbook: deploy-master.yml
 
 # launch addons, like dns
-- include: deploy-addons.yml
+- import_playbook: deploy-addons.yml
 
 # install kubernetes on the nodes
-- include: deploy-node.yml
+- import_playbook: deploy-node.yml
 
 # provision opencontrail once the services are operational
 - hosts:
