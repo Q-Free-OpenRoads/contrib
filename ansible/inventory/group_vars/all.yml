@@ -113,7 +113,7 @@ dns_replicas: 1
 # It's recommanded to remove the private key from the server. So if you set
 # kube_cert_keep_ca to true, please copy the ca.key file somewhere that
 # is secured, and remove it from server.
-kube_cert_keep_ca: false
+kube_cert_keep_ca: true
 
 # There are other variable in roles/kubernetes/defaults/main.yml but changing
 # them comes with a much higher risk to your cluster. So proceed over there
