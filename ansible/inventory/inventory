@@ -5,5 +5,5 @@ dev-kub-master.chesdev.net
 masters
 
 [nodes]
-dev-kub-master.chesdev.net
 #dev-kub-node-[1:8].chesdev.net
+dev-kub-node-[9:9].chesdev.net
