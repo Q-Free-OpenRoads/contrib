@@ -1,0 +1,15 @@
+---
+- name: Set overlayfs supported for CentOS
+  set_fact:
+    is_overlayfs_supported: true  
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_version | version_compare('7.1708', '>=')
+    - is_atomic
+
+# Only CentOS Atomic host supported right now
+- include_tasks: configure-overlayfs.yml
+  when: 
+    - is_overlayfs_supported
+    - docker_use_overlayfs
+...

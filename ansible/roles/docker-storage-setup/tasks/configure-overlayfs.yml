@@ -1,0 +1,63 @@
+---
+- name: Get docker info
+  command: docker info
+  register: docker_info
+  
+- name: Check if overlayfs2 is already configured
+  set_fact:
+    is_overlay_configured: "Storage Driver: overlay2" in docker_info.stdout
+
+- block:
+    name: (Atomic) Reset current storage and configure overlayfs
+
+    - name: stop docker
+      service: name=docker state=stopped
+      ignore_errors: yes
+
+    - name: remove any existing docker-storage config file
+      file:
+        path: /etc/sysconfig/docker-storage
+        state: absent
+
+    - name: (Atomic) Reset storage
+      command: atomic reset storage
+
+    - name: (Atomic) Remove docker-pool if it still exists
+      lvol:
+        lv: docker-pool
+        vg: cah
+        state: absent
+        force: yes
+
+    - name: (Atomic) Grow root lv to fill vg
+      lvol:
+        lv: root
+        vg: cah
+        size: +100%FREE
+
+    - name: (Atomic) Grow root fs to match lv
+      filesystem:
+      dev: /dev/mapper/cah-root
+        fstype: xfs
+        resizefs: yes
+
+    - name: (Atomic) Modify atomic storage driver to use overlay2
+      command: atomic storage modify --driver overlay2
+
+    - name: (Atomic) Force Ansible to re-gather disk facts
+      setup:
+        filter: 'ansible_mounts'
+
+    - name: Remove thinpool from docker-storage-setup config file
+      lineinfile:
+        path: /etc/sysconfig/docker-storage-setup
+        state: absent
+        regexp: '^CONTAINER_THINPOOL=docker-pool'
+
+    - name: start docker
+      service: name=docker state=restarted enabled=true
+
+    when: 
+      - is_atomic
+      - not is_overlay_configured
+...

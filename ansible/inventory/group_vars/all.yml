@@ -151,3 +151,9 @@ etcd_system_images_tag: "latest"
 flannel_system_images_registry: "registry.fedoraproject.org"
 flannel_system_images_registry_namespace: "f27"
 flannel_system_images_tag: "latest"
+
+# Turn to 'true' to configure docker to use overlayfs2 if it's supported by the host. 
+# If the host is not currently using overlayfs2, this may be a destructive operation
+# for any existing docker images/storage on the host.  Currently, this flag is only 
+# supported for CentOS Atomic host.
+docker_use_overlayfs: true
