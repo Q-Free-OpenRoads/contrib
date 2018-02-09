@@ -4,7 +4,7 @@
     is_overlayfs_supported: true  
   when:
     - ansible_distribution == "CentOS"
-    - ansible_distribution_version | version_compare('7.1708', '>=')
+    - ansible_distribution_version | version_compare('7.4.1708', '>=')
     - is_atomic
 
 # Only CentOS Atomic host supported right now

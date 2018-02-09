@@ -5,11 +5,10 @@
   
 - name: Check if overlayfs2 is already configured
   set_fact:
-    is_overlay_configured: "Storage Driver: overlay2" in docker_info.stdout
+    is_overlay_configured: "'Storage Driver: overlay2' in docker_info.stdout"
 
-- block:
-    name: (Atomic) Reset current storage and configure overlayfs
-
+- name: (Atomic) Reset current storage and configure overlayfs
+  block:
     - name: stop docker
       service: name=docker state=stopped
       ignore_errors: yes
@@ -56,8 +55,7 @@
 
     - name: start docker
       service: name=docker state=restarted enabled=true
-
-    when: 
+  when: 
       - is_atomic
       - not is_overlay_configured
 ...
