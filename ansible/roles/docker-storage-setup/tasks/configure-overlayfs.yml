@@ -5,7 +5,7 @@
   
 - name: Check if overlayfs2 is already configured
   set_fact:
-    is_overlay_configured: "'Storage Driver: overlay2' in docker_info.stdout"
+    is_overlay_configured: "{{'Storage Driver: overlay2' in docker_info.stdout}}"
 
 - name: (Atomic) Reset current storage and configure overlayfs
   block:
@@ -19,7 +19,7 @@
         state: absent
 
     - name: (Atomic) Reset storage
-      command: atomic reset storage
+      command: atomic storage reset
 
     - name: (Atomic) Remove docker-pool if it still exists
       lvol:
@@ -36,7 +36,7 @@
 
     - name: (Atomic) Grow root fs to match lv
       filesystem:
-      dev: /dev/mapper/cah-root
+        dev: /dev/mapper/cah-root
         fstype: xfs
         resizefs: yes
 
